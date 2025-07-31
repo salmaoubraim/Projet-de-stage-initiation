@@ -1,0 +1,24 @@
+Options -Indexes
+RewriteEngine On
+
+# استثناء الملفات والصور (CSS, JS, Images, etc.)
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# باقي الطلبات تمشي لـ index.php
+RewriteRule ^ index.php [QSA,L]
+# empêcher تصفح الملفات مباشرة
+Options -Indexes
+
+# تفعيل mod_rewrite
+RewriteEngine On
+
+# استثناء الملفات الحقيقية (images, css, js...)
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# إعادة توجيه باقي الطلبات إلى index.php مع page=...
+RewriteRule ^(.+)$ index.php?page=$1 [QSA,L]
+

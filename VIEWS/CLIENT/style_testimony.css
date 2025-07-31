@@ -1,0 +1,74 @@
+   body {
+        background-color: #3d3d3d;
+        color: white;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        min-height: 100vh;
+    }
+   
+    fieldset {
+        border: 2px solid white;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 500px;
+        margin: 0 auto 30px auto;
+        background-color: #444;
+    }
+    legend {  
+        font-weight: bold;
+        font-size: 24px;
+        padding: 0 10px;
+        color: #f3f5f4;
+    }
+    label {
+        font-weight: bold;
+        margin-top: 10px;
+        display: block;
+    }
+    input[type="text"], textarea {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        color: black;
+    }
+    button {
+        margin-top: 15px;
+        padding: 10px 20px;
+        background-color: #88908b;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: transparent;
+        border: 1px solid white;
+        color: white;
+    }
+    .commentaire {
+        background-color: #555;
+        padding: 15px;
+        margin: 10px auto;
+        max-width: 600px;
+        border-radius: 6px;
+        box-shadow: 0 0 10px #222;
+    }
+    .commentaire strong {
+        display: block;
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+    .commentaire small {
+        color: #ccc;
+        font-size: 12px;
+        float: right;
+    }
+    .error {
+        color: #ff6b6b;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 10px;
+    }
