@@ -1,5 +1,6 @@
 <?php
 session_start();
+include("../../VIEWS/headerr.php"); 
 include_once('../../config/database.php');
 
 $database = new Database();
@@ -31,20 +32,19 @@ $commentaires = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
 <meta charset="UTF-8" />
 <title>Témoignages</title>
-
-<link rel="stylesheet" href="style_testimony.css">
+  <link rel="stylesheet" href="style_produits.css">
+  <link rel="stylesheet" href="panierr.css">
+  <link rel="stylesheet" href="style_loginn.css">
   <script src="script_homee.js" ></script>
-    <link rel="stylesheet" href="style_login.css">
-          <link rel="stylesheet" href="panierr.css">
-  <link rel="stylesheet" href="style_home.css">
+<link rel="stylesheet" href="style_testimony.css">
+
 
 </head>
 <body>
 
-<?php include("../../VIEWS/headerr.php"); ?>
-
+ <br><br> 
 <fieldset>
-    <legend style="text-align:center;" >Laisser un témoignage</legend>
+  <legend style="text-align:center;" >Laisser un témoignage</legend>
 
     <?php if (!empty($error)): ?>
         <p class="error"><?= htmlspecialchars($error) ?></p>
@@ -57,7 +57,7 @@ $commentaires = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <label for="commentaire">Votre témoignage :</label>
         <textarea name="commentaire" id="commentaire" rows="4" required></textarea>
 
-        <button type="submit">Envoyer</button>
+        <button style=" font-size: 18px; margin-left: 35%; margin-top: 30px;" type="submit">Envoyer</button>
     </form>
 </fieldset>
 

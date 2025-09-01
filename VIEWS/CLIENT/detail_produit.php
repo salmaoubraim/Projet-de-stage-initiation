@@ -1,107 +1,86 @@
 <?php
-include_once('../../config/database.php');
 session_start();
+include_once('../../config/database.php');
 
 $database = new Database();
 $conn = $database->getConnection();
 
-// التحقق من ID
-if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    echo "Produit non spécifié ou invalide.";
-    exit;
-}
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) { exit("Produit non spécifié ou invalide."); }
 
 $id = intval($_GET['id']);
 $stmt = $conn->prepare("SELECT * FROM produits WHERE id = ?");
 $stmt->execute([$id]);
 $produit = $stmt->fetch(PDO::FETCH_ASSOC);
+if (!$produit) exit("Produit non trouvé.");
 
-if (!$produit) {
-    echo "Produit non trouvé.";
-    exit;
-}
+// Initialiser le panier
+if (!isset($_SESSION['panier'])) { $_SESSION['panier'] = []; }
 
-// تهيئة السلة
-if (!isset($_SESSION['panier'])) {
-    $_SESSION['panier'] = [];
-}
-
-// الرسالة
 $message = "";
 
-// التعامل مع POST
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['commander'])) {
-    $prodId = intval($_POST['commander']);
-    if (!in_array($prodId, $_SESSION['panier'])) {
-        $_SESSION['panier'][] = $prodId;
+// Ajouter au panier
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajouter'])) {
+    $prodId = intval($_POST['ajouter']);
+    if (!isset($_SESSION['panier'][$prodId])) {
+        $_SESSION['panier'][$prodId] = 1;
         $message = "Produit ajouté au panier avec succès !";
     } else {
-        $message = "Produit déjà dans le panier.";
+        $message = "Produit déjà dans le panier !";
     }
 }
 
-// واش راه المنتج فالسلة؟
-$estDansPanier = in_array($produit['id'], $_SESSION['panier']);
+// Vérifier si le produit est déjà dans le panier
+$estDansPanier = isset($_SESSION['panier'][$produit['id']]);
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <title>Détail produit - <?= htmlspecialchars($produit['nom']) ?></title>
 <link rel="stylesheet" href="style_detail_produits.css">
+
 </head>
 <body>
-<div id="popup-success" style=" margin-top: 50px; display:none; position:fixed; top:30%; left:50%; transform:translate(-50%, -50%); background-color: white; padding:20px; border:1px solid #0a0; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.2); z-index:999;">
-  <p style="color: black; font-weight:bold;">Commande effectuée avec succès !</p>
-  <button onclick="document.getElementById('popup-success').style.display='none'">Fermer</button>
+
+<!-- Container image + nom -->
+<div class="produit-container">
+    <img class="img-produit" src="../../images/<?= htmlspecialchars($produit['image']); ?>?t=<?= time(); ?>" alt="<?= htmlspecialchars($produit['nom']); ?>">
+    <div class="nom-produit"><?= htmlspecialchars($produit['nom']); ?></div>
 </div>
 
-<h1><?= htmlspecialchars($produit['nom']) ?></h1>
+<!-- Popup Success -->
+<div id="popup-success">
+  <p>Votre commande a été effectuée avec succès !</p>
+  <p>Livraison prévue dans 2 jours.</p>
+  <button onclick="this.parentElement.style.display='none'">Fermer</button>
+</div>
+
 <p><strong>Description:</strong><br><?= nl2br(htmlspecialchars($produit['description'])) ?></p>
-<p><strong>Prix:</strong> <?= number_format($produit['prix'], 2) ?> MAD</p>
-<p><strong>N.B: Livraison est gratuite ;</strong><br><br>
+<p><strong>Prix:</strong> <?= number_format($produit['prix'],2) ?> MAD</p>
+<p style="color:green"><strong>N.B: Livraison gratuite</strong></p>
 
-<?php if ($message): ?>
-  <div class="message"><?= $message ?></div>
+<?php if($message): ?>
+  <div class="message"><?= htmlspecialchars($message) ?></div>
 <?php endif; ?>
 
-
-
-<?php if ($estDansPanier): ?>
-  <!-- المنتج موجود فالسلة -->
-<button class="btn btn-commander" onclick="showSuccessPopup()">Commander</button>
-
+<?php if($estDansPanier): ?>
+    <button class="btn-commander" onclick="showPopup()">Commander</button>
 <?php else: ?>
-  <!-- المنتج مازال ما تزادش -->
-  <form method="post">
-    <input type="hidden" name="commander" value="<?= $produit['id'] ?>" />
-    <button type="submit" class="btn">Ajouter au panier</button>
-  </form>
+    <form method="post">
+        <input type="hidden" name="ajouter" value="<?= $produit['id'] ?>">
+        <button type="submit" class="btn-ajouter">Ajouter au panier</button>
+    </form>
 <?php endif; ?>
+
+<!-- Bouton retour تحت الصورة والاسم -->
+<!-- Bouton Retour avec redirection directe -->
+<br><button class="bouton-retour" onclick="window.location.href='produits.php';">Retour</button>
 
 <script>
-  function showSuccessPopup() {
-    const popup = document.createElement("div");
-    popup.innerHTML = `
-      <div style=" margin-left: 44%;
-       padding:20px; border:2px solid #88908b; border-radius:10px; width:300px; text-align:center; box-shadow:0 0 10px rgba(0,0,0,0.3);">
-        <strong>Commande effectuée avec succès !</strong><br><br>
-        <button onclick="this.parentElement.parentElement.remove()" style="margin-top:10px; background-color: #88908b; color:white; border:none; padding:8px 12px; border-radius:5px; cursor:pointer;">
-          Fermer
-        </button>
-      </div>
-    `;
-    popup.style.position = "fixed";
-    popup.style.top = "30%";
-    popup.style.left = "50%";
-    popup.style.transform = "translate(-50%, -50%)";
-    popup.style.zIndex = "9999";
-
-    document.body.appendChild(popup);
-  }
-
-
+function showPopup() {
+    document.getElementById('popup-success').style.display='block';
+}
 </script>
 
 </body>

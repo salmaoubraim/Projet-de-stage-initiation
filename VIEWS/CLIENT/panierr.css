@@ -19,16 +19,56 @@
     }
 
     .panier-link {
-        background-color: transparent;
+        background-color: #88908b;
         color: white;
         margin-right: 140px;
-        margin-top: 20px;
-        padding: 8px 14px;
-        border-radius: 8px;
-        font-weight: bold;
+        margin-bottom: 25px;
+        padding: 6px 12px;
+        border-radius: 5px;
+       font-size: 18px;
         text-decoration: none;
+         font-weight: bold;
     }
 
     .panier-link:hover {
-        background-color:#88908b ;
+        background-color:transparent;
     }
+         table {
+            width: 70%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            margin-left: 14%;
+        }
+        th, td {
+            border: 2px solid black;
+            padding: 12px;
+            text-align: center;
+        }
+        .petite_image {
+            width: 100px;
+        }
+        #voir-pluss:hover {
+            background-color: #88908b;
+        }
+        #voir-pluss {
+              margin-left: 44%;
+                margin-top: 15px;
+                margin-bottom: 10%;
+                padding: 10px 40px;
+                cursor: pointer;
+                background-color: #88908b;
+                border-radius: 40px;
+                color: white;
+                font-weight: bolder;
+                text-decoration: none;
+                background-color: black;
+                border-radius: 10px;
+                font-size: large;
+                border: none;
+        }
+        h2 {
+            text-align: center;
+        }
+        h3 {
+            text-align: center;
+        }

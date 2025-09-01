@@ -82,7 +82,6 @@ header {
     font-weight: bold;
     padding: 10px 20px;
     border-radius: 10px;
-    margin-right: 100px;
     background-color: transparent;
 }
 
@@ -100,7 +99,7 @@ main {
     font-size: large;
 }
 
-.image {
+img {
     width: 400px;
 }
 
@@ -125,6 +124,11 @@ main {
     padding: 10px;
     border-radius: 5px;
 }
+/* ملي تدوزي على hamburger ولا على menu-toggle تبان القائمة */
+.menu-toggle:hover .menu-links {
+    display: flex;
+}
+
 
 .menu-links a {
     color: black;
@@ -142,4 +146,8 @@ main {
 }
 h1 {
     color: #e0e7e4;
+}
+
+.btn + .btn {
+  margin-left: 20px; /* المسافة غير بيناتهم */
 }

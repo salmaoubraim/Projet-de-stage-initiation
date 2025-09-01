@@ -1,7 +1,6 @@
 <?php 
-include_once ('../../config/database.php');
 session_start();
-
+include_once ('../../config/database.php');
 $database = new Database();
 $conn = $database->getConnection();
 
@@ -17,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['offset'])) {
 
     foreach ($produits as $produit): ?>
         <div class="product-card">
-          <img src="images/<?= htmlspecialchars($produit['image']) ?>" alt="<?= htmlspecialchars($produit['nom']) ?>">
+          <img class="images" src="../../images/<?= htmlspecialchars($produit['image']) ?>" alt="<?= htmlspecialchars($produit['nom']) ?>">
           <h3><?= htmlspecialchars($produit['nom']) ?></h3>
           <p><?= htmlspecialchars($produit['prix']) ?> MAD</p>
          <a class="voir_detail" href="detail_produit.php?id=<?= $produit['id']; ?>">Voir détails</a><br>
@@ -30,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['offset'])) {
 }
 
 // 2. الصفحة الرئيسية مع تحميل أول 6 منتجات
-include("../../VIEWS/headerr.php");
+
 
 $limit = 6;
 $offset = 0;
@@ -46,16 +45,19 @@ $row = $totalResult->fetch(PDO::FETCH_ASSOC);
 $totalProduits = $row['total'];
 
 ?>
-
+<?php include("../../VIEWS/headerr.php"); ?>
+ 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <title>Nos Produits</title>
-  <link rel="stylesheet" href="style_produits.css" />
+  <link rel="stylesheet" href="style_produits.css">
   <link rel="stylesheet" href="panierr.css">
   <link rel="stylesheet" href="style_loginn.css">
   <script src="script_homee.js" ></script>
+
+  
 </head>
 <body>
 
@@ -65,7 +67,7 @@ $totalProduits = $row['total'];
 <div id="produits-container">
   <?php foreach ($produits as $produit): ?>
     <div class="product-card">
-      <img src="images/<?= htmlspecialchars($produit['image']); ?>" alt="<?= htmlspecialchars($produit['nom']); ?>">
+      <img src="../../images/<?= htmlspecialchars($produit['image']); ?>" alt="<?= htmlspecialchars($produit['nom']); ?>">
       <h3><?= htmlspecialchars($produit['nom']); ?></h3>
       <p style="color: #e8edebff"><?= htmlspecialchars($produit['prix']); ?> MAD</p>
       <a class="voir_detail" href="detail_produit.php?id=<?= $produit['id']; ?>">Voir détails</a><br>

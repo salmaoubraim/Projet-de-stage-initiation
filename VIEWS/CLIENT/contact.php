@@ -1,6 +1,7 @@
 <?php
 session_start();
-include("../../VIEWS/headerr.php");
+include("../../VIEWS/headerr.php"); 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // traitement...
     $_SESSION['success_message'] = "Merci ! Nous avons bien reçu votre message. Veuillez patienter, une réponse vous sera envoyée bientôt.";
@@ -47,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <label>Message :</label>
     <textarea name="message" rows="5" required></textarea>
 
-    <input class="envoyer" type="submit"></input>
+    <input style="font-size: 18px;" class="envoyer" type="submit"></input>
   </form>
 </fieldset>
 

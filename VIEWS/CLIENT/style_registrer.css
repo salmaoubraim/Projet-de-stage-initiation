@@ -5,7 +5,6 @@
       min-height: 100vh;
       margin: 0;
       font-family: Arial, sans-serif;
-    
     }
 
     form {
@@ -46,7 +45,6 @@
     }
 
     button {
-      margin-top: 20px;
       width: 100%;
       padding: 10px;
       background-color: #88908b;
@@ -62,3 +60,4 @@
       background-color: transparent;
       border: 1px solid #fff;
     }
+ 

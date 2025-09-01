@@ -1,6 +1,9 @@
  body {
     font-family: Arial;
     padding: 20px;
+    background: linear-gradient(135deg, #f9f9f9, #e0e0e0);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
   }
   .btn {
     padding: 10px 15px;
@@ -13,7 +16,8 @@
   }
  
   .btn-commander {
-    background-color: #88908b;
+    background-color: green;
+    font-size: 20px;
   }
   .message {
     background: #d4edda;
@@ -23,3 +27,58 @@
     border-radius: 5px;
     border: 1px solid #c3e6cb;
   }
+  #popup-success {
+    display:none;
+    position:fixed;
+    top:30%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    background-color:white;
+    padding:20px;
+    border:2px solid #88908b;
+    border-radius:10px;
+    box-shadow:0 0 15px rgba(0,0,0,0.3);
+    z-index:9999;
+    text-align:center;
+}
+#popup-success button { 
+    margin-top:10px; 
+    font-size:18px; 
+    background-color:green; 
+    color:white; 
+    border:none; 
+    padding:8px 12px; 
+    border-radius:5px; 
+    cursor:pointer; 
+}
+.message { font-weight:bold; margin:10px 0; color:green; }
+.btn-commander { background-color: green; padding:10px 15px; border:none; color:white; border-radius:5px; cursor:pointer; }
+.btn-ajouter { background-color: green; padding:10px 15px; border:none; color:white; border-radius:5px; cursor:pointer; font-size: 18px; }
+
+/* Layout image + nom + retour */
+.produit-container {
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:10px;
+}
+.img-produit { 
+    max-width:120px; 
+    border:1px solid #ccc; 
+    border-radius:5px; 
+    padding:3px; 
+}
+.nom-produit { 
+    font-size:16px; 
+    font-weight:bold; 
+}
+.bouton-retour { 
+    margin-top: 30px; 
+    background-color: black ; 
+    color: white; 
+    padding:5px 10px; 
+    border:none; 
+    border-radius:5px; 
+    cursor:pointer; 
+    font-size: 18px; 
+}
