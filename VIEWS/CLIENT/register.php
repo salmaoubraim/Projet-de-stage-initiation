@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once("../../config/database.php");
-require_once("../../VIEWS/headerr.php");
+include("../../VIEWS/headerr.php"); 
 
 $db = new Database();
 $conn = $db->getConnection();
@@ -14,14 +14,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if($nom && $email && $motDePasse) {
         $password = password_hash($motDePasse, PASSWORD_BCRYPT);
 
-        $check = $conn->prepare("SELECT id FROM users WHERE email = ?");
+        $check = $conn->prepare("SELECT id FROM user WHERE email = ?");
         $check->execute([$email]);
 
         if($check->rowCount() > 0) {
             $_SESSION['message'] = "⚠️ Cet email est déjà utilisé";
             $_SESSION['type'] = "error";
         } else {
-            $stmt = $conn->prepare("INSERT INTO users (nom_utilisateur, email, mot_de_passe) VALUES (?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO user (nom_utilisateur, email, mot_de_passe) VALUES (?, ?, ?)");
             if($stmt->execute([$nom, $email, $password])) {
                 $_SESSION['message'] = "✅ Inscription réussie !";
                 $_SESSION['type'] = "success";

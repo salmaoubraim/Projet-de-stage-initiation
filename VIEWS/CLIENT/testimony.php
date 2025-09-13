@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $commentaire = trim($_POST['commentaire'] ?? '');
 
     if ($nom !== '' && $commentaire !== '') {
-        $stmt = $conn->prepare("INSERT INTO commentaires (nom, commentaire, date) VALUES (?, ?, NOW())");
+        $stmt = $conn->prepare("INSERT INTO commentaire (nom, commentaire, date) VALUES (?, ?, NOW())");
         $stmt->execute([$nom, $commentaire]);
         header("Location: testimony.php"); // إعادة تحميل الصفحة بعد الإرسال
         exit;
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // جلب كل التعليقات
-$stmt = $conn->prepare("SELECT * FROM commentaires ORDER BY date DESC");
+$stmt = $conn->prepare("SELECT * FROM commentaire ORDER BY date DESC");
 $stmt->execute();
 $commentaires = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>

@@ -80,13 +80,3 @@ $cartCount = isset($_SESSION['panier']) ? array_sum($_SESSION['panier']) : 0;
 </html>
   
    
-
-
-
-
-
-
-
-
-
-

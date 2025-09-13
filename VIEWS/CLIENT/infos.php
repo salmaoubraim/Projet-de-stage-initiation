@@ -1,6 +1,7 @@
 <?php 
 session_start();
-include("../../VIEWS/headerr.php"); ?>
+include("../../VIEWS/headerr.php"); 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

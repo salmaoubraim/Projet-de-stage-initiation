@@ -1,8 +1,8 @@
 <?php
 session_start();
 require_once '../../CONFIG/Database.php';
-include("../../VIEWS/headerr.php");
-
+include("../../VIEWS/headerr.php"); 
+ 
 $database = new Database();
 $db = $database->getConnection();
 
@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $adresse = $_POST['adresse'];
     $user_id = $_SESSION['user']['id'] ?? null;
 
-    $stmt = $db->prepare("INSERT INTO commandes_speciales (username, user_id, nom_produit, quantite, adresse) VALUES (?, ?, ?, ?, ?)");
+    $stmt = $db->prepare("INSERT INTO commande_speciale (username, user_id, nom_produit, quantite, adresse) VALUES (?, ?, ?, ?, ?)");
     $stmt->execute([$username, $user_id, $produit, $quantite, $adresse]);
 
     // لإظهار popup بعد الحفظ
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <fieldset>
    <legend><h1>Créer une nouvelle commande :</h1></legend>
 
-   <form method="post" class="order-form">
+   <form  method="post" class="order-form">
         <label>Nom d'utilisateur :</label>
         <input type="text" name="username" required>
 

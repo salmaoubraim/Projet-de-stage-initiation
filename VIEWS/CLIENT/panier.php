@@ -1,7 +1,7 @@
 <?php
 session_start();
-include("../../VIEWS/headerr.php");
-require_once '../../CONFIG/Database.php';
+include("../../VIEWS/headerr.php"); 
+require_once '../../CONFIG/database.php';
 
 // ربط قاعدة البيانات
 $database = new Database();
@@ -12,7 +12,7 @@ function getProduitsPanier($db, $panier) {
     if (empty($panier)) return [];
 
     $ids = implode(',', array_map('intval', array_keys($panier)));
-    $stmt = $db->prepare("SELECT * FROM produits WHERE id IN ($ids)");
+    $stmt = $db->prepare("SELECT * FROM produit WHERE id IN ($ids)");
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -29,8 +29,8 @@ $produits = getProduitsPanier($db, $panier);
     <meta charset="UTF-8">
     <title>Panier</title>
     <script src="script_homee.js"></script>
-          <link rel="stylesheet" href="panierr.css">
-  <link rel="stylesheet" href="style_loginn.css">
+    <link rel="stylesheet" href="panierr.css">
+    <link rel="stylesheet" href="style_loginn.css">
 </head>
 <body style="background-color: white; color: black;">
 

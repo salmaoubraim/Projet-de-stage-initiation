@@ -1,14 +1,13 @@
 <?php
 session_start();
-include_once('../../config/database.php');
-
+require_once '../../CONFIG/database.php';
 $database = new Database();
 $conn = $database->getConnection();
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) { exit("Produit non spécifié ou invalide."); }
 
 $id = intval($_GET['id']);
-$stmt = $conn->prepare("SELECT * FROM produits WHERE id = ?");
+$stmt = $conn->prepare("SELECT * FROM produit WHERE id = ?");
 $stmt->execute([$id]);
 $produit = $stmt->fetch(PDO::FETCH_ASSOC);
 if (!$produit) exit("Produit non trouvé.");

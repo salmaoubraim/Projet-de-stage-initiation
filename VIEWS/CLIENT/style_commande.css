@@ -18,6 +18,7 @@ fieldset {
   justify-content: center;
   justify-items: center;
   display: flex;
+  margin-bottom: 30px;
   width: 50%;
   border: 2px solid white;
   padding: 10px;

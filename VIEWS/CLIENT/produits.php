@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['offset'])) {
     $offset = intval($_POST['offset']);
     $limit = 6;
 
-    $sql = "SELECT * FROM produits LIMIT $limit OFFSET $offset";
+    $sql = "SELECT * FROM produit LIMIT $limit OFFSET $offset";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     $produits = $stmt->fetchAll();
@@ -34,12 +34,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['offset'])) {
 $limit = 6;
 $offset = 0;
 
-$sql = "SELECT * FROM produits LIMIT $limit OFFSET $offset";
+$sql = "SELECT * FROM produit LIMIT $limit OFFSET $offset";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $produits = $stmt->fetchAll();
 
-$totalQuery = "SELECT COUNT(*) as total FROM produits";
+$totalQuery = "SELECT COUNT(*) as total FROM produit";
 $totalResult = $conn->query($totalQuery);
 $row = $totalResult->fetch(PDO::FETCH_ASSOC);
 $totalProduits = $row['total'];
@@ -101,14 +101,15 @@ btnVoirPlus.addEventListener('click', () => {
   })
   .then(res => res.text())
   .then(data => {
-    if (data.trim() !== "") {
-      container.insertAdjacentHTML("beforeend", data);
-      offset += offsetInit;
-      btnRetour.style.display = 'inline-block';
-      if (offset >= total) btnVoirPlus.style.display = "none";
-    } else {
-      btnVoirPlus.style.display = "none";
-    }
+if (data.trim() !== "") {
+  container.insertAdjacentHTML("beforeend", data);
+  offset += offsetInit;
+
+  // ✅ هنا: نخفي "Voir plus" ونظهر "Retour"
+  btnVoirPlus.style.display = "none";
+  btnRetour.style.display = "inline-block";
+}
+
   });
 });
 

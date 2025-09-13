@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include("../../VIEWS/headerr.php");
+include("../../VIEWS/headerr.php"); 
 include_once ('../../config/database.php');
 
 
@@ -8,7 +8,7 @@ include_once ('../../config/database.php');
 $conn = new mysqli("localhost", "root", "", "electro_ecommerce");
 
 // جلب الصورة
-$sql = "SELECT * FROM images_home LIMIT 1";
+$sql = "SELECT * FROM image_home LIMIT 1";
 $result = $conn->query($sql);
 
 if (!isset($_SESSION['panier'])) {

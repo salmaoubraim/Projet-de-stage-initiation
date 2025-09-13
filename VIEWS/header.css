@@ -58,6 +58,7 @@ header {
 }
 .dropdown-content form {
     margin: 0;
+    color: black;
 }
 
 .link-button {
@@ -100,6 +101,7 @@ header {
 
 .menu-links a:hover {
   background: #555;
+  color: black;
 }
 
 /* ملي تدوز بالسوري على hamburger ولا على menu-toggle تبان القائمة */
@@ -129,6 +131,3 @@ header {
             border-radius: 8px;
             cursor: pointer;
   }
-
-
-
