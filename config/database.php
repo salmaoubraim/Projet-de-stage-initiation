@@ -1,4 +1,5 @@
 <?php
+
 class Database {
     private $host = "localhost";
     private $dbname = "electro_ecommerce"; // سميّة قاعدة البيانات ديالك
@@ -21,5 +22,11 @@ class Database {
 
         return $this->conn;
     }
+}
+?>
+<?php
+$conn = new mysqli("localhost", "root", "", "electro_ecommerce");
+if ($conn->connect_error) {
+    die("Connexion échouée : " . $conn->connect_error);
 }
 ?>

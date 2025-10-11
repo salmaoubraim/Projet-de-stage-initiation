@@ -31,7 +31,7 @@ $cartCount = count($_SESSION['panier']); // باش تبين فـ header
     <link rel="stylesheet" href="header.css">
 
 </head>
-<body >
+<body style="background: linear-gradient(135deg, black, rgba(59, 57, 57, 1), black);">
 
 <main>
     <div>

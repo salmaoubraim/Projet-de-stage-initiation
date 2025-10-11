@@ -1,0 +1,293 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1
+-- Généré le : sam. 11 oct. 2025 à 13:03
+-- Version du serveur : 10.4.32-MariaDB
+-- Version de PHP : 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données : `electro_ecommerce`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `admins`
+--
+
+CREATE TABLE `admins` (
+  `id` int(11) NOT NULL,
+  `nom_utilisateur` varchar(150) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Déchargement des données de la table `admins`
+--
+
+INSERT INTO `admins` (`id`, `nom_utilisateur`, `email`, `password`, `created_at`) VALUES
+(1, 'Mohamed', 'admin@electroshop.com', 'admin123', '2025-10-07 12:00:59'),
+(2, 'salma', 'salma@electroshop.com', 'salma123', '2025-10-11 09:34:15'),
+(3, 'Ali', 'ali@electroshop.com', 'ali123', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `commande_speciale`
+--
+
+CREATE TABLE `commande_speciale` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `username` varchar(100) NOT NULL,
+  `nom_produit` varchar(150) NOT NULL,
+  `quantite` int(11) NOT NULL,
+  `adresse` text NOT NULL,
+  `status` varchar(50) DEFAULT 'En attente',
+  `date_commande` timestamp NOT NULL DEFAULT current_timestamp(),
+  `admin_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Déchargement des données de la table `commande_speciale`
+--
+
+INSERT INTO `commande_speciale` (`id`, `user_id`, `username`, `nom_produit`, `quantite`, `adresse`, `status`, `date_commande`, `admin_id`) VALUES
+(19, NULL, 'Salma Bouzid', 'tablette', 1, 'Casa', 'En attente', '2025-10-11 09:02:53', NULL),
+(20, NULL, 'Ali KAMAL', 'télephone iphone 14', 2, 'Marrakech', 'En attente', '2025-10-11 09:04:38', NULL),
+(21, NULL, 'Saad', 'Montre connectée', 1, 'Agadir', 'En attente', '2025-10-11 09:05:19', NULL),
+(22, NULL, 'karima', 'Caméra', 1, 'casa', 'En attente', '2025-10-11 09:06:44', NULL),
+(23, NULL, 'Adam', 'casque', 1, 'Agadir', 'En attente', '2025-10-11 09:07:18', NULL),
+(24, NULL, 'Omar', 'Ecouteurs filiaires', 2, 'Inzegan', 'En attente', '2025-10-11 09:08:35', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `commentaire`
+--
+
+CREATE TABLE `commentaire` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(100) NOT NULL,
+  `commentaire` text NOT NULL,
+  `date` datetime DEFAULT current_timestamp(),
+  `id_produit` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Déchargement des données de la table `commentaire`
+--
+
+INSERT INTO `commentaire` (`id`, `nom`, `commentaire`, `date`, `id_produit`, `user_id`) VALUES
+(3, 'ali', 'VOTRE SITE EST SUPERBE', '2025-10-07 20:34:12', NULL, NULL),
+(4, 'salma', 'ElectroShop est une idée extra-ordinaire et unique', '2025-10-07 20:35:05', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `image_home`
+--
+
+CREATE TABLE `image_home` (
+  `id` int(11) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `titre` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Déchargement des données de la table `image_home`
+--
+
+INSERT INTO `image_home` (`id`, `image`, `titre`, `created_at`) VALUES
+(1, '../electro_ecommerce/images/image1.jpg', 'Image d\'accueil', '2025-09-09 15:48:04');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `produit`
+--
+
+CREATE TABLE `produit` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(150) NOT NULL,
+  `prix` decimal(10,2) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_by` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Déchargement des données de la table `produit`
+--
+
+INSERT INTO `produit` (`id`, `nom`, `prix`, `image`, `description`, `created_at`, `created_by`) VALUES
+(1, 'Apple MOBILE', 9500.00, 'Apple MOBILE.jpg', 'Smartphone Apple mobile dernière génération.', '2025-09-09 17:12:04', NULL),
+(2, 'CAMERA', 7200.00, 'CAMERA.jpg', 'Caméra numérique haute résolution pour photo et vidéo.', '2025-09-09 17:12:04', NULL),
+(3, 'CASQUE', 1200.00, 'CASQUE.jpg', 'Casque audio de haute qualité.', '2025-09-09 17:12:04', NULL),
+(4, 'CHARGEUR', 300.00, 'CHARGEUR.jpg', 'Chargeur rapide compatible avec plusieurs appareils.', '2025-09-09 17:12:04', NULL),
+(5, 'Ecouteurs Bluetooth sans Fil', 850.00, 'Ecouteurs Bluetooth sans Fil.jpg', 'Écouteurs sans fil avec longue autonomie.', '2025-09-09 17:12:04', NULL),
+(6, 'Écouteurs filaires', 150.00, 'Écouteurs filaires.jpg', 'Écouteurs filaires pratiques et confortables.', '2025-09-09 17:12:04', NULL),
+(7, 'HP 640 G5 Laptop', 12500.00, 'HP 640 G5 Laptop.jpg', 'Ordinateur portable HP performant pour bureautique et multimédia.', '2025-09-09 17:12:04', NULL),
+(8, 'IPAD', 8900.00, 'IPAD.jpg', 'Tablette Apple iPad dernière version.', '2025-09-09 17:12:04', NULL),
+(9, 'montre connectée', 2100.00, 'montre connectée.jpg', 'Smartwatch connectée avec capteurs santé et notifications.', '2025-09-09 17:12:04', NULL),
+(10, 'phone 14 pro purple', 14500.00, 'phone 14 pro purple.jpg', 'iPhone 14 Pro couleur violet.', '2025-09-09 17:12:04', NULL),
+(11, 'souris', 250.00, 'souris.jpg', 'Souris sans fil ergonomique.', '2025-09-09 17:12:04', NULL),
+(12, 'USB', 180.00, 'USB.jpg', 'Clé USB de grande capacité de stockage.', '2025-09-09 17:12:04', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `nom_utilisateur` varchar(100) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `mot_de_passe` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Déchargement des données de la table `user`
+--
+
+INSERT INTO `user` (`id`, `nom_utilisateur`, `email`, `mot_de_passe`, `created_at`) VALUES
+(10, 'Mohammed', 'mohamed@gmail.com', '123456', '2025-09-18 13:45:31'),
+(11, 'salma', 'Salma22@gmail.com', 'salma123', '2025-10-07 11:42:51'),
+(12, 'adam', 'adam66@gamil.com', '555', '2025-10-07 11:42:51'),
+(15, 'Ali', 'ali@gmail.com', '12388', '0000-00-00 00:00:00'),
+(16, 'karima', 'karima@gmail.com', '1239956', '0000-00-00 00:00:00'),
+(17, 'Amina', 'amina@gmail.com', '1210956', '0000-00-00 00:00:00');
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `commande_speciale`
+--
+ALTER TABLE `commande_speciale`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_commande_user` (`user_id`),
+  ADD KEY `fk_commande_admin` (`admin_id`);
+
+--
+-- Index pour la table `commentaire`
+--
+ALTER TABLE `commentaire`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_commentaire_produit` (`id_produit`),
+  ADD KEY `fk_commentaire_user` (`user_id`);
+
+--
+-- Index pour la table `image_home`
+--
+ALTER TABLE `image_home`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `produit`
+--
+ALTER TABLE `produit`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_produit_admin` (`created_by`);
+
+--
+-- Index pour la table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pour la table `commande_speciale`
+--
+ALTER TABLE `commande_speciale`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT pour la table `commentaire`
+--
+ALTER TABLE `commentaire`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT pour la table `image_home`
+--
+ALTER TABLE `image_home`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `produit`
+--
+ALTER TABLE `produit`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT pour la table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `commande_speciale`
+--
+ALTER TABLE `commande_speciale`
+  ADD CONSTRAINT `fk_commande_admin` FOREIGN KEY (`admin_id`) REFERENCES `admins` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `fk_commande_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `commentaire`
+--
+ALTER TABLE `commentaire`
+  ADD CONSTRAINT `fk_commentaire_produit` FOREIGN KEY (`id_produit`) REFERENCES `produit` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_commentaire_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `produit`
+--
+ALTER TABLE `produit`
+  ADD CONSTRAINT `fk_produit_admin` FOREIGN KEY (`created_by`) REFERENCES `admins` (`id`) ON DELETE SET NULL;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

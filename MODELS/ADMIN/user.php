@@ -1,20 +1,16 @@
 <?php
-class User {
-    private $users = [
-        ['email'=>'admin@site.com','password'=>'123456','role'=>'admin'],
-        ['email'=>'user1@site.com','password'=>'123','role'=>'client']
-    ];
-
-    public function loginAdmin($email, $password){
-        foreach($this->users as $user){
-            if($user['email']==$email && $user['password']==$password && $user['role']=='admin'){
-                return true;
-            }
-        }
-        return false;
+class UserModel {
+    private $db;
+    public function __construct($db) {
+        $this->db = $db;
     }
 
-    public function getUsers(){
-        return array_filter($this->users, fn($u)=>$u['role']=='client');
+    public function getAll() {
+        return $this->db->query("SELECT * FROM user ORDER BY created_at DESC")->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function delete($id) {
+        $stmt = $this->db->prepare("DELETE FROM user WHERE id=?");
+        return $stmt->execute([$id]);
     }
 }

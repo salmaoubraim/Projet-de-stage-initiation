@@ -32,7 +32,7 @@ $produits = getProduitsPanier($db, $panier);
     <link rel="stylesheet" href="panierr.css">
     <link rel="stylesheet" href="style_loginn.css">
 </head>
-<body style="background-color: white; color: black;">
+<body style="background: white; color: black;">
 
 <h2>Mon panier</h2>
 

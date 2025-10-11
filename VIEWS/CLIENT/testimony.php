@@ -43,14 +43,14 @@ $commentaires = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <body>
 
  <br><br> 
-<fieldset>
+<fieldset style="background-color: transparent;">
   <legend style="text-align:center;" >Laisser un témoignage</legend>
 
     <?php if (!empty($error)): ?>
         <p class="error"><?= htmlspecialchars($error) ?></p>
     <?php endif; ?>
 
-    <form method="POST" action="testimony.php">
+    <form style="background-color: transparent;" method="POST" action="testimony.php">
         <label for="nom">Nom :</label>
         <input type="text" name="nom" id="nom" required>
 

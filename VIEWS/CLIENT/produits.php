@@ -59,7 +59,7 @@ $totalProduits = $row['total'];
 
   
 </head>
-<body>
+<body style="background: linear-gradient(135deg, black, rgba(59, 57, 57, 1), black);">
 
 <h1>Nos Produits</h1>
 

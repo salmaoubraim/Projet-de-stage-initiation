@@ -1,6 +1,5 @@
  body {
-          margin-top: 30px;
-
+  margin-top: 30px;
   background-color: #3d3d3d;
   color: white;
   min-height: 100vh;
@@ -93,4 +92,64 @@ input, textarea {
 
 .close:hover {
   color: #000;
+}
+
+
+
+
+
+/* ========== RESPONSIVE CONTACT ADDED ========== */
+
+/* TABLETS */
+@media (max-width: 1024px) {
+    fieldset {
+        width: 60%;
+        margin-left: 20%;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    fieldset {
+        width: 85%;
+        margin-left: 7.5%;
+        padding: 20px;
+    }
+    
+    .envoyer {
+        width: 100%;
+        font-size: 16px;
+    }
+    
+    .modal-content {
+        width: 85%;
+        padding: 25px;
+    }
+}
+
+/* SMALL MOBILE */
+@media (max-width: 480px) {
+    fieldset {
+        width: 92%;
+        margin-left: 4%;
+        padding: 15px;
+    }
+    
+    legend h2 {
+        font-size: 18px;
+    }
+    
+    label {
+        font-size: 14px;
+    }
+    
+    input, textarea {
+        font-size: 13px;
+        padding: 8px;
+    }
+    
+    .envoyer {
+        font-size: 15px;
+        padding: 10px;
+    }
 }

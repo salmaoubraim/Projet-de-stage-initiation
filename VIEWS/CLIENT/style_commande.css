@@ -64,3 +64,50 @@ input, textarea {
   background-color: transparent;
 }
       
+
+
+/* ========== RESPONSIVE ADDED ========== */
+
+/* TABLETS */
+@media (max-width: 1024px) {
+    fieldset {
+        margin-left: 25%;
+        width: 60%;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    body {
+        margin-top: 10px;
+    }
+
+    fieldset {
+        margin-left: 10%;
+        margin-right: 10%;
+        width: 80%;
+        padding: 15px;
+    }
+
+    .envoyer {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+/* SMALL MOBILE */
+@media (max-width: 480px) {
+    fieldset {
+        margin-left: 5%;
+        margin-right: 5%;
+        width: 90%;
+    }
+
+    legend {
+        font-size: 18px;
+    }
+
+    .envoyer {
+        font-size: 18px;
+    }
+}

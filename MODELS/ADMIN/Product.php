@@ -1,17 +1,19 @@
+
 <?php
-class Product {
+// MODELS/Produit.php
+require_once '../..config/Database.php';
+
+class Produit {
     private $conn;
+
     public function __construct() {
-        $this->conn = new mysqli("localhost", "root", "", "electro_ecommerce");
+        $database = new Database();
+        $this->conn = $database->getConnection();
     }
 
-    public function getProducts() {
-        $result = $this->conn->query("SELECT * FROM produit");
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
-
-    public function countProducts() {
-        $result = $this->conn->query("SELECT COUNT(*) as total FROM produit");
-        return $result->fetch_assoc()['total'];
+    public function getAll() {
+        $stmt = $this->conn->prepare("SELECT * FROM produit");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

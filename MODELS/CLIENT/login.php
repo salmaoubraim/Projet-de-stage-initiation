@@ -1,7 +1,7 @@
 <?php
 class User {
     private $conn;
-    private $table_name = "users"; // اسم جدول المستخدمين في قاعدة البيانات
+    private $table_name = "user"; // اسم جدول المستخدمين في قاعدة البيانات
 
     public $id;
     public $nom_utilisateur;
