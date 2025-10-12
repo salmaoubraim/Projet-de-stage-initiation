@@ -17,6 +17,31 @@ if($conn->connect_error) die("Connexion échouée : " . $conn->connect_error);
 $productCount = $conn->query("SELECT COUNT(*) AS total_products FROM produit")->fetch_assoc()['total_products'];
 $orderCount = $conn->query("SELECT COUNT(*) AS total_orders FROM commande_speciale")->fetch_assoc()['total_orders'];
 $userCount = $conn->query("SELECT COUNT(*) AS total_users FROM user")->fetch_assoc()['total_users'];
+
+// Ventes mensuelles dynamiques
+// Ventes mensuelles dynamiques
+$ventesMensuelles = [];
+for($m=1; $m<=12; $m++){
+    $res = $conn->query("
+        SELECT SUM(p.prix * c.quantite) AS total
+        FROM commande_speciale c
+        JOIN produit p ON LOWER(c.nom_produit) = LOWER(p.nom)
+        WHERE MONTH(c.date_commande) = $m
+    ")->fetch_assoc();
+
+    $ventesMensuelles[] = $res['total'] ?? 0; // si pas de vente -> 0
+}
+
+
+
+// Commandes par jour de la semaine (Dim=0, Lun=1, … Sam=6)
+$jours = [1,2,3,4,5,6,7]; // 1=Dimanche … 7=Samedi
+$commandesParJour = [];
+foreach($jours as $j){
+    $res = $conn->query("SELECT COUNT(*) AS total FROM commande_speciale WHERE DAYOFWEEK(date_commande)=$j")->fetch_assoc();
+    $commandesParJour[] = $res['total'] ?? 0;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -110,14 +135,17 @@ body { margin:0; font-family:'Segoe UI', sans-serif; background:#f4f6f9; }
 
 <script>
 // Graphiques Chart.js
-const salesCtx = document.getElementById('salesChart').getContext('2d');
-const salesChart = new Chart(salesCtx, {
+const ventesMensuelles = <?php echo json_encode($ventesMensuelles); ?>;
+const commandesParJour = <?php echo json_encode($commandesParJour); ?>;
+
+// Sales Chart
+const salesChart = new Chart(document.getElementById('salesChart').getContext('2d'), {
     type: 'line',
     data: {
         labels: ['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'],
-        datasets: [{
+        datasets:[{
             label:'Ventes (€)',
-            data:[1200,1500,1800,2000,2300,2100,2500,2700,3000,2800,3200,3500],
+            data: ventesMensuelles,
             borderColor:'#007bff',
             backgroundColor:'rgba(0,123,255,0.2)',
             tension:0.4
@@ -126,14 +154,14 @@ const salesChart = new Chart(salesCtx, {
     options:{ responsive:true, plugins:{ legend:{labels:{color:'#555'}} }, scales:{ x:{ticks:{color:'#555'}}, y:{ticks:{color:'#555'}} } }
 });
 
-const ordersCtx = document.getElementById('ordersChart').getContext('2d');
-const ordersChart = new Chart(ordersCtx, {
+// Orders Chart
+const ordersChart = new Chart(document.getElementById('ordersChart').getContext('2d'), {
     type: 'bar',
     data: {
-        labels:['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'],
+        labels:['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
         datasets:[{
             label:'Commandes',
-            data:[12,19,8,15,10,20,5],
+            data: commandesParJour,
             backgroundColor:'#28a745'
         }]
     },

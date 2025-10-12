@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 11 oct. 2025 à 13:03
+-- Généré le : dim. 12 oct. 2025 à 11:58
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -72,7 +72,9 @@ INSERT INTO `commande_speciale` (`id`, `user_id`, `username`, `nom_produit`, `qu
 (21, NULL, 'Saad', 'Montre connectée', 1, 'Agadir', 'En attente', '2025-10-11 09:05:19', NULL),
 (22, NULL, 'karima', 'Caméra', 1, 'casa', 'En attente', '2025-10-11 09:06:44', NULL),
 (23, NULL, 'Adam', 'casque', 1, 'Agadir', 'En attente', '2025-10-11 09:07:18', NULL),
-(24, NULL, 'Omar', 'Ecouteurs filiaires', 2, 'Inzegan', 'En attente', '2025-10-11 09:08:35', NULL);
+(25, NULL, 'Omar', 'Ecouteurs filiaires', 1, 'Agadir', 'En attente', '2025-10-12 08:24:13', NULL),
+(26, NULL, 'Amina', 'Apple mobile', 1, 'Tiznit', 'En attente', '2025-10-12 08:26:25', NULL),
+(27, NULL, 'Amina', 'Apple mobile', 1, 'Tiznit', 'En attente', '2025-10-12 08:28:11', NULL);
 
 -- --------------------------------------------------------
 
@@ -173,9 +175,10 @@ INSERT INTO `user` (`id`, `nom_utilisateur`, `email`, `mot_de_passe`, `created_a
 (10, 'Mohammed', 'mohamed@gmail.com', '123456', '2025-09-18 13:45:31'),
 (11, 'salma', 'Salma22@gmail.com', 'salma123', '2025-10-07 11:42:51'),
 (12, 'adam', 'adam66@gamil.com', '555', '2025-10-07 11:42:51'),
-(15, 'Ali', 'ali@gmail.com', '12388', '0000-00-00 00:00:00'),
-(16, 'karima', 'karima@gmail.com', '1239956', '0000-00-00 00:00:00'),
-(17, 'Amina', 'amina@gmail.com', '1210956', '0000-00-00 00:00:00');
+(18, 'sana', 'sanae23@gmail.com', '123457', '2025-10-11 20:03:00'),
+(19, 'amine', 'amine20@gmail.com', '1233', '2025-10-11 20:45:38'),
+(20, 'maryam', 'maryam11@gmail.com', '123457', '2025-10-11 20:47:05'),
+(21, 'Soukaina', 'soukaina88@gmail.com', '123457', '2025-10-11 21:07:35');
 
 --
 -- Index pour les tables déchargées
@@ -237,7 +240,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT pour la table `commande_speciale`
 --
 ALTER TABLE `commande_speciale`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT pour la table `commentaire`
@@ -255,13 +258,13 @@ ALTER TABLE `image_home`
 -- AUTO_INCREMENT pour la table `produit`
 --
 ALTER TABLE `produit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Contraintes pour les tables déchargées

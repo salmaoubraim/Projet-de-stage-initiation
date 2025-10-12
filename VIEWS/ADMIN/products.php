@@ -47,17 +47,19 @@ h1 {
 
 /* Bouton Ajouter produit */
 .btn-success {
-    background:#fff; 
-    border:1px solid #222; 
     padding:10px 20px; 
     border-radius:6px;
     font-size:16px;
     cursor:pointer;
     transition:0.2s;
-    color:#222;
+    color: white;
     margin-bottom: 20px;
+    background: #007bff; 
+    color: white; 
 }
-.btn-success:hover { background:#eee; }
+.btn-success:hover { 
+    background: #114480ff;
+    color: black; }
 
 /* Tableau produits */
 .table-responsive {
@@ -69,7 +71,7 @@ h1 {
 table {
     width: 100%;           /* prend tout l’espace de .table-responsive */
     border-collapse: collapse;
-    background:#fff;
+    background: #fff;
     border-radius:6px;
     overflow: hidden;
 }
@@ -80,13 +82,14 @@ thead {
 }
 
 th, td {
+    border: 1px solid black;
     padding:12px 10px;
     text-align:center;
-    border-bottom:1px solid #ccc;
+    border-bottom: 1px solid black;
 }
 
 tbody tr:hover {
-    background:#f5f5f5;
+    background: #f5f5f5;
     transition:0.2s;
 }
 
@@ -102,6 +105,7 @@ tbody tr:hover {
 
 .btn-warning:hover, .btn-danger:hover {
     background:#eee;
+    
 }
 
 /* Image produit */
@@ -124,8 +128,8 @@ img.product-img {
 <main class="main-content">
     <h1>Gestion des Produits</h1>
 
-    <a style=" text-decoration: none; color: #2e639cff ;" href="ajouter_product.php" class="btn btn-success">
-        <i class="fas fa-plus"></i> Ajouter un produit
+    <a style=" text-decoration: none; color: white;" href="ajouter_product.php" class="btn btn-success">
+    Ajouter un produit
     </a>
 
     <div class="table-responsive">

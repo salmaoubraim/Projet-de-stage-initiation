@@ -1,27 +1,31 @@
 <?php
 include '../../VIEWS/admin_header.php';
-include '../../config/database.php';
+include '../../config/Database.php';
 
 if (!isset($_GET['id'])) die("ID non spécifié");
 $id = intval($_GET['id']);
 
-$sql = "SELECT * FROM admins WHERE id=$id";
-$res = $conn->query($sql);
+$sql = "SELECT * FROM user WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$res = $stmt->get_result();
 $user = $res->fetch_assoc();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nom = $_POST['nom'];
+    $nom = $_POST['nom_utilisateur'];
     $email = $_POST['email'];
-    $stmt = $conn->prepare("UPDATE user SET nom=:nom, email=:email WHERE id=:id");
-    $stmt->bindParam(':nom', $nom);
-    $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':id', $id);
+
+    // ✅ correction ici : utilisation de ?
+    $stmt = $conn->prepare("UPDATE user SET nom_utilisateur = ?, email = ? WHERE id = ?");
+    $stmt->bind_param("ssi", $nom, $email, $id);
     $stmt->execute();
 
-    header("Location: users.php?msg=Utilisateur modifié");
+    header("Location: user.php?msg=Utilisateur modifié");
     exit;
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -49,7 +53,7 @@ body { font-family:'Segoe UI',sans-serif; background:#f5f5f5; margin:0; padding:
       <h2>Modifier Utilisateur</h2>
       <form method="POST">
           <label>Nom</label>
-          <input type="text" name="nom" value="<?= htmlspecialchars($user['nom_utilisateur']) ?>" required>
+          <input type="text" name="nom_utilisateur" value="<?= htmlspecialchars($user['nom_utilisateur']) ?>" required>
 
           <label>Email</label>
           <input type="email" name="email" value="<?= htmlspecialchars($user['email']) ?>" required>

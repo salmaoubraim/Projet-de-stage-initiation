@@ -40,15 +40,34 @@ if ($result && $result->num_rows > 0) {
             font-weight: bold;
         }
        
+        .container {
+            width: 90%;
+            margin: 40px auto;
+            text-align: right;
+        }
+        .add-btn {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .add-btn:hover {
+            background: #114480ff;
+            color: white;
+        }
+
         table {
             width: 90%;
-            margin: 50px auto;
+            margin: 20px auto;
             border-collapse: collapse;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         th, td {
-            border: 1px solid #ddd;
+            border: 1px solid black;
             padding: 12px;
             text-align: center;
         }
@@ -67,10 +86,13 @@ if ($result && $result->num_rows > 0) {
             text-decoration: none;
             margin: 0 5px;
         }
-       
     </style>
 </head>
 <body>
+
+<div class="container">
+    <a href="ajouter_user.php" class="add-btn">Ajouter un utilisateur</a>
+</div>
 
 <table>
   <tr>

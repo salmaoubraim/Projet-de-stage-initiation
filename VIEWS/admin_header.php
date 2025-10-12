@@ -1,28 +1,41 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+$current_page = basename($_SERVER['PHP_SELF']);
+$admin_name = isset($_SESSION['nom_utilisateur']) ? htmlspecialchars($_SESSION['nom_utilisateur']) : 'Admin';
+?>
 <header style="background:black; color:white; padding:15px; display:flex; justify-content:space-between; align-items:center;">
-    
-    <!-- Logo / Dashboard -->
+    <!-- Logo -->
     <div style="font-size:20px; font-weight:bold;">
-        <a  style="color:white; text-decoration:none;">ElectroShop</a>
+        <a style="color:white; text-decoration:none;">ElectroShop</a>
     </div>
 
-    <!-- Navigation centrée -->
-    <nav style="display:flex; gap:30px; justify-content:center; flex:1;">
-        <a href="dashboard.php" class="nav-link">Dashboard</a>
-        <a href="products.php" class="nav-link">Products</a>
-        <a href="order.php" class="nav-link">Commandes</a>
-        <a href="user.php" class="nav-link">Users</a>
-    </nav>
+    <!-- Navigation (masquée على login.php) -->
+    <?php if ($current_page !== 'login.php') : ?>
+        <nav style="display:flex; gap:30px; justify-content:center; flex:1;">
+            <a href="dashboard.php" class="nav-link">Dashboard</a>
+            <a href="products.php" class="nav-link">Products</a>
+            <a href="order.php" class="nav-link">Commandes</a>
+            <a href="user.php" class="nav-link">Users</a>
+        </nav>
+    <?php else: ?>
+        <div style="flex:1;"></div>
+    <?php endif; ?>
 
-    <!-- User menu à droite -->
-    <div style="display:flex; align-items:center; gap:10px;">
-        <span>👤 Admin</span>
-        <a href="logout.php" class="logout-btn">Logout</a>
+    <!-- اسم الأدمن + Logout -->
+    <div style="display:flex; align-items:center; font-size: 22px; gap:10px;">
+        <span>👤 <?= $admin_name ?></span>
+        <?php if ($current_page !== 'login.php') : ?>
+            <a href="logout.php" class="logout-btn">Logout</a>
+        <?php endif; ?>
     </div>
-
 </header>
 
+
+
 <style>
-    /* Style des liens du nav avec underline hover */
     nav a.nav-link {
         color: white;
         text-decoration: none;
@@ -35,7 +48,6 @@
         position: absolute;
         width: 0;
         height: 2px;
-        text-decoration: none;
         left: 0;
         bottom: -3px;
         background-color: white;
@@ -46,7 +58,6 @@
         width: 100%;
     }
 
-    /* Logout button hover lift */
     .logout-btn {
         background: #afadadff;
         color: white;

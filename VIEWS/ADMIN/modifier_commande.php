@@ -5,21 +5,27 @@ include '../../config/database.php';
 if (!isset($_GET['id'])) die("ID non spécifié");
 $id = intval($_GET['id']);
 
-$sql = "SELECT * FROM commande_speciale WHERE id=$id";
-$res = $conn->query($sql);
+// Récupération de la commande
+$sql = "SELECT * FROM commande_speciale WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$res = $stmt->get_result();
 $order = $res->fetch_assoc();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $status = $_POST['status'];
-    $stmt = $conn->prepare("UPDATE commande_speciale SET status=:status WHERE id=:id");
-    $stmt->bindParam(':status', $status);
-    $stmt->bindParam(':id', $id);
+
+    // ✅ Correction ici : utilisation de ? au lieu de :status, :id
+    $stmt = $conn->prepare("UPDATE commande_speciale SET status = ? WHERE id = ?");
+    $stmt->bind_param("si", $status, $id);
     $stmt->execute();
 
     header("Location: order.php?msg=Statut modifié");
     exit;
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">

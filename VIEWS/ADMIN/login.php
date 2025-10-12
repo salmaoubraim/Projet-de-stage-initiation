@@ -6,7 +6,6 @@ if(isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true)
 }
 include '../../VIEWS/admin_header.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -16,6 +15,7 @@ include '../../VIEWS/admin_header.php';
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <style>
+   header { font-size: 25;}
   label {
     display: block;
     text-align: left;  /* <-- ici */
@@ -40,7 +40,7 @@ include '../../VIEWS/admin_header.php';
         </div>
         <div class="mb-3">
             <label style="color:white"> Password:</label>
-          <input type="password" class="form-control form-control-lg rounded-pill bg-dark text-light border-light" placeholder="Mot de passe" name="password" required>
+          <input type="mot_de_passe" class="form-control form-control-lg rounded-pill bg-dark text-light border-light" placeholder="Mot de passe" name="password" required>
         </div>
         <button type="submit" style="background: #afadadff;" class="btn btn-primary w-100 btn-lg rounded-pill fw-bold">Se connecter</button>
       </form>
