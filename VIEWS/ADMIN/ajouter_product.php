@@ -81,8 +81,8 @@ body {
     margin-bottom: 20px;
     border-radius: 10px;
     border: 1px solid #444;
-    background: #1a1a1a;
-    color: #fff;
+    background: white;
+    color: black;
     box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
     font-size: 16px;
     transition: all 0.3s ease;
@@ -90,7 +90,7 @@ body {
 
 .form-card input:focus {
     outline: none;
-    background: #111;
+    background: white;
     border: 1px solid #0d6efd;
     box-shadow: 0 0 10px #0d6efd;
 }

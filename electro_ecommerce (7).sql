@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 12 oct. 2025 à 11:58
+-- Généré le : ven. 17 oct. 2025 à 00:53
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -73,8 +73,7 @@ INSERT INTO `commande_speciale` (`id`, `user_id`, `username`, `nom_produit`, `qu
 (22, NULL, 'karima', 'Caméra', 1, 'casa', 'En attente', '2025-10-11 09:06:44', NULL),
 (23, NULL, 'Adam', 'casque', 1, 'Agadir', 'En attente', '2025-10-11 09:07:18', NULL),
 (25, NULL, 'Omar', 'Ecouteurs filiaires', 1, 'Agadir', 'En attente', '2025-10-12 08:24:13', NULL),
-(26, NULL, 'Amina', 'Apple mobile', 1, 'Tiznit', 'En attente', '2025-10-12 08:26:25', NULL),
-(27, NULL, 'Amina', 'Apple mobile', 1, 'Tiznit', 'En attente', '2025-10-12 08:28:11', NULL);
+(26, NULL, 'Amina', 'Apple mobile', 1, 'Tiznit', 'En attente', '2025-10-12 08:26:25', NULL);
 
 -- --------------------------------------------------------
 
