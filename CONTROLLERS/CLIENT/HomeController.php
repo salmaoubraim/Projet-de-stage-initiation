@@ -1,6 +1,11 @@
 <?php
+
 class HomeController {
+
     public function index() {
-        require_once 'views/client/home.php';
+
+        require_once __DIR__ . '/../../views/client/home.php';
+
     }
+
 }
